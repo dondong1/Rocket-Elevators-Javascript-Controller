@@ -218,52 +218,14 @@ class Elevator {
         this.status = _status  
         }      
     }
-    
-module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
 
-//*========================Scenario 1 =======================
-//let column = new column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
-
+//========================Scenario 1 =======================
+let column = new column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
+console.log(column)
 column.elevatorsList[0].currentFloor =2
 column.elevatorsList[1].currentFloor =6
 
 let elevator=column.requestElvator(3, 'Up')
 elevator.requestFloor(7)
 //======================== End Scenario 1 =======================
-
-// ==================================Scenario 2===================
-let column = new column(1, 'online', 10, 2)
-column.elevatorsList[0].currentFloor =10
-column.elevatorsList[1].currentFloor =3
-
-//Part1
-let elevator=column.requestElevator(1, 'Up')
-elevator.requestFloor(6)
-
-//Part2
-let elevator=column.requestElevator(3, 'Up')
-elevator.requestFloor(5)
-
-//Part3
-let elevator=column.requestElevator(9, 'Down')
-elevator.requestFloor(2)
-
-// ==================================End Scenario 2==================
-
-//=================================Scenario 3========================
-let column = new column(1, 'online', 10, 2)
-column.elevatorList[0].currentFloor= 10
-column.elevatorList[1].currentFloor = 3
-column.elevatorList[1].staus = 'Up'
-column.elevatorList[1].destination = 6
-
-//Part 1
-let.elevator=column.requestElevator(3, 'Down')
-elevator.requestFloor(2)
-
-
-//Part 2
-let.elevator=column.requestElevator(10, 'Down')
-elevator.requestFloor(3)
-
-//==================================End Scenario 3====================
+module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
