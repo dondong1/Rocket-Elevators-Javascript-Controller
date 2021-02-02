@@ -3,7 +3,7 @@ let floorRequestButtonID = 1
 let callButtonID = 1
 
 class Column {
-    contructor (_id, _status, _amountOfFloors, _amountOfElevators) {
+    constructor (_id, _status, _amountOfFloors, _amountOfElevators) {
         this.ID = _id   
         this.status = _status 
         this.amountOfFloors = _amountOfFloors
@@ -22,7 +22,7 @@ class Column {
         for (let i = 0; i < _amountOfFloors; i++) {
             if(buttonFloor < _amountOfFloors) { //If it's not the last floor
             let callButton = new CallButton(callButtonID, 'OFF', buttonFloor, 'Up') //id, status, floor, direction
-            this.callButtonsList.push(callButon)
+            this.callButtonsList.push(callButton)
             callButtonID ++
             }
             if(buttonFloor > 1) { //If it is not the first floor
@@ -36,7 +36,8 @@ class Column {
     createElevators(_amountOfFloors, _amountOfElevators) {
         for(let i = 0; i < _amountOfElevators; i++) {
             let elevator = new Elevator(elevatorID, 'idle', _amountOfFloors, 1) //id, status, amountOfFloors, currentFloor
-            this.elevatorList.push(elevator)
+            this.elevatorsList.push(elevator)
+            console.log(elevator)
             elevatorID++
         }
     }
@@ -127,10 +128,10 @@ class Elevator {
     createFloorRequestButtons(_amountOfFloors) {
         let buttonFloor = 1
         for (let i =0; i < _amountOfFloors; i++) {
-            let floorRequestButton = new FloorRequestButton(floorReqeustButtonID, 'OFF', buttonFloor) //id, status, floor
+            let floorRequestButton = new FloorRequestButton(floorRequestButtonID, 'OFF', buttonFloor) //id, status, floor
             this.floorRequestButtonsList.push(floorRequestButton)
             buttonFloor++
-            floorReqeustButtonID++
+            floorRequestButtonID++
         }
     }
 
@@ -201,17 +202,20 @@ class Elevator {
          this.floor = _floor
          this.direction = _direction
      }
- }
+ 
     //Simulate when a user press a button inside the elevator 
-    requestFloor() 
-        class FloorRequestButton {
-        constructor (_id, _status, _floor) {
-            this.ID = _id 
-            this.status = _status 
-            this.floor = _floor
-        }
+    requestFloor() {
+       
     }
+ }
 
+    class FloorRequestButton {
+    constructor (_id, _status, _floor) {
+        this.ID = _id 
+        this.status = _status 
+        this.floor = _floor
+    }
+}
     class Door {
         constructor(_id, _status) {
         this.ID = _id 
@@ -220,12 +224,12 @@ class Elevator {
     }
 
 //========================Scenario 1 =======================
-let column = new column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
+let column = new Column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
 console.log(column)
-column.elevatorsList[0].currentFloor =2
-column.elevatorsList[1].currentFloor =6
+//column.elevatorsList[0].currentFloor =2
+//column.elevatorsList[1].currentFloor =6
 
-let elevator=column.requestElvator(3, 'Up')
-elevator.requestFloor(7)
+//let elevator=column.requestElevator(3, 'Up')
+//elevator.requestFloor(7)
 //======================== End Scenario 1 =======================
 module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
