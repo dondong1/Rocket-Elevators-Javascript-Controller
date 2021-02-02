@@ -61,7 +61,7 @@ class Column {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor)
             }
             //The elevator is lower than me, is coming up and I want to go up
-            else if(requestedFloor > elevator.currentFloor && elevator.direction == 'Up' && requestedDirection == elevator.dreiction) {
+            else if(requestedFloor > elevator.currentFloor && elevator.direction == 'Up' && requestedDirection == elevator.direction) {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor)
             }
             //The elevator is higher than me, is coming down and I want to go down
@@ -204,15 +204,15 @@ class Elevator {
         this.status = _status  
         }      
     }
+module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
 
-
-//========================Scenario 1 =======================
-let column = new column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
+//*========================Scenario 1 =======================
+//let column = new column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
 
 column.elevatorsList[0].currentFloor =2
 column.elevatorsList[1].currentFloor =6
 
-let elevator=colunm.requestElvator(3, 'Up')
+let elevator=column.requestElvator(3, 'Up')
 elevator.requestFloor(7)
 //======================== End Scenario 1 =======================
 
@@ -252,6 +252,3 @@ let.elevator=column.requestElevator(10, 'Down')
 elevator.requestFloor(3)
 
 //==================================End Scenario 3====================
-
-
-module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
