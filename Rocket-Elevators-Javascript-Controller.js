@@ -236,7 +236,7 @@ console.log()
 //======================== End Scenario 1 =======================*/
 
 
-// ==================================Scenario 2===================
+/* ==================================Scenario 2===================
 let column = new Column(1, 'online', 10, 2)
 
 column.elevatorsList[0].currentFloor =10
