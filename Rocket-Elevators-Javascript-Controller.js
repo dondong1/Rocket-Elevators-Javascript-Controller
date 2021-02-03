@@ -57,14 +57,14 @@ class Column {
     //score system depending on the current elevators state.  Since the bestScore and the referenceGap are higher
     //values than what could be possibly calculated.  The first elevator will always become the default bestElevator.
     //before being compared with to other elevators.  If two elevators get the same score, the nearest one is prioritized. 
-    findElevator(requestFloor, requestDirection) {
+    findElevator(requestedFloor, requestedDirection) {
         let bestElevatorInformations = {
             bestElevator: null,
             bestScore: 5,
             referenceGap: 100000000
         }
 
-        this.elevatorList.forEach(elevator => {
+        this.elevatorsList.forEach(elevator => {
             //The elevator is at my floor and going in the direction I want
             if(requestedFloor == elevator.currentFloor && elevator.status == 'stopped' && requestedDirection == elevator.direction) {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor)
@@ -178,7 +178,7 @@ class Elevator {
         //WAIT 5 seconds
         if (!this.overweight) {
             this.door.status = 'closing'
-            if (this.door.obstruction) {
+            if (!this.door.obstruction) {
                 this.door.status = 'closed'
             } else {
                 //WAIT: for the person to clear the way
@@ -189,9 +189,10 @@ class Elevator {
             while (this.overweight) {
                 //Activate overweight alarm, and wait for someone to get out
                 this.overweight = false
-            }
-            this.operateDoors()
-        }
+             }
+             this.operateDoors()
+         }
+            
     }   
  } // Elevator
  
@@ -204,9 +205,7 @@ class Elevator {
      }
  
     //Simulate when a user press a button inside the elevator 
-    requestFloor() {
-       
-    }
+
  }
 
     class FloorRequestButton {
@@ -223,24 +222,31 @@ class Elevator {
         }      
     }
 
-//========================Scenario 1 =======================
+/*========================Scenario 1 =======================
 let column = new Column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
+console.log("as", column.elevatorsList[0].currentFloor)
 column.elevatorsList[0].currentFloor =2
+console.log("a2", column.elevatorsList[0].currentFloor)
 column.elevatorsList[1].currentFloor =6
+console.log("a3", column.elevatorsList[1].currentFloor)
 let elevator=column.requestElevator(3, 'Up')
+console.log("a5", elevator)
 elevator.requestFloor(7)
+console.log()
+//======================== End Scenario 1 =======================*/
 
-//======================== End Scenario 1 =======================
-module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
 
 // ==================================Scenario 2===================
-let column = new column(1, 'online', 10, 2)
-column.elevatorsList[0].currentFloor =10
-column.elevatorsList[1].currentFloor =3
+let column = new Column(1, 'online', 10, 2)
 
+column.elevatorsList[0].currentFloor =10
+console.log("b1", column.elevatorsList[0].currentFloor)
+column.elevatorsList[1].currentFloor =3
+console.log("b2", column.elevatorsList[1].currentFloor)
 //Part1
 let elevator=column.requestElevator(1, 'Up')
-elevator.requestFloor(6)
+console.log("b3", elevator)
+/*elevator.requestFloor(6)
 
 //Part2
 let elevator=column.requestElevator(3, 'Up')
@@ -253,7 +259,7 @@ elevator.requestFloor(2)
 // ==================================End Scenario 2==================
 
 //=================================Scenario 3========================
-let column = new column(1, 'online', 10, 2)
+let column = new Column(1, 'online', 10, 2)
 column.elevatorList[0].currentFloor= 10
 column.elevatorList[1].currentFloor = 3
 column.elevatorList[1].staus = 'Up'
@@ -268,4 +274,5 @@ elevator.requestFloor(2)
 let.elevator=column.requestElevator(10, 'Down')
 elevator.requestFloor(3)
 
-//==================================End Scenario 3====================
+//==================================End Scenario 3====================*/
+module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
