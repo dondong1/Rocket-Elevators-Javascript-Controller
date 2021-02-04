@@ -4,15 +4,15 @@ let callButtonID = 1
 
 class Column {
     constructor (_id, _status, _amountOfFloors, _amountOfElevators) {
-        this.ID = _id   
-        this.status = _status 
-        this.amountOfFloors = _amountOfFloors
-        this.amountOfElevators = _amountOfElevators
-        this.elevatorsList = []
-        this.callButtonsList = []
+        this.ID = _id;   
+        this.status = _status; 
+        this.amountOfFloors = _amountOfFloors;
+        this.amountOfElevators = _amountOfElevators;
+        this.elevatorsList = [];
+        this.callButtonsList = [];
 
-        this.createElevators(_amountOfFloors, _amountOfElevators)
-        this.createCallButtons(_amountOfFloors)
+        this.createElevators(_amountOfFloors, _amountOfElevators);
+        this.createCallButtons(_amountOfFloors);
     }
     
     //----------------------- Method ---------------------//
@@ -37,7 +37,7 @@ class Column {
         for(let i = 0; i < _amountOfElevators; i++) {
             let elevator = new Elevator(elevatorID, 'idle', _amountOfFloors, 1) //id, status, amountOfFloors, currentFloor
             this.elevatorsList.push(elevator)
-            console.log(elevator)
+ //           console.log(elevator)
             elevatorID++
         }
     }
@@ -85,10 +85,11 @@ class Column {
             else {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor)
             }
-        //bestElevator = bestElevatorInformations.bestElevator
-        //bestScore = bestElevatorInformations.bestScore
-        //referenceGap = bestElevatorInformations.referenceGap
+     
         });
+
+        console.log();
+        console.log("   >> >>> ELEVATOR " + bestElevatorInformations.bestElevator.ID + " WAS CALLED <<< <<");
         return bestElevatorInformations.bestElevator;
 
     }
@@ -106,7 +107,9 @@ class Column {
                 bestElevatorInformations.referenceGap = gap 
             }
         }
+
         return bestElevatorInformations
+
     }
 
 }// Column
@@ -139,9 +142,9 @@ class Elevator {
     //Simulate when a user press a button inside the elevator 
     requestFloor(floor) {
         this.floorRequestList.push(floor)
-        this.sortFloorList
-        this.move
-        this.operateDoors
+        this.sortFloorList()
+        this.move()
+        this.operateDoors()
     }
 
     move() {
@@ -152,34 +155,41 @@ class Elevator {
                 this.direction = 'Up'
                 while (this.currentFloor < destination) {
                     this.currentFloor++
+                    console.log(this.ID + " move to current floor" + this.currentFloor);
                 }
             } else if (this.currentFloor > destination) {
                 this.direction = 'Down'
-                while (this.currentFloor < destination) {
+                while (this.currentFloor > destination) {
                     this.currentFloor--
+                    console.log(this.ID + " move to current floor" + this.currentFloor);
+
                 }
             }
             this.status = 'stopped'
             this.floorRequestList.shift()
+
         }
+        this.status = 'idle'
     }
 
     sortFloorList() {
         if (this.direction == 'Up') {
-            this.floorRequestButtonsList.sort(function(a, b) {return a-b});
+            this.floorRequestButtonsList.sort(function(a, b){return a-b});
         } else {
-            this.floorRequestList.sort(function(a, b) {return b-a});
+            this.floorRequestList.sort(function(a, b){return b-a});
 
         }
     }
 
     operateDoors() {
         this.doorStatus = 'opened'
+        console.log(this.doorStatus)
         //WAIT 5 seconds
         if (!this.overweight) {
-            this.door.status = 'closing'
+            this.doorStatus = 'closing'
             if (!this.door.obstruction) {
-                this.door.status = 'closed'
+                this.doorStatus = 'closed'
+                console.log(this.doorStatus)
             } else {
                 //WAIT: for the person to clear the way
                 this.door.obstruction = false
@@ -222,57 +232,69 @@ class Elevator {
         }      
     }
 
-/*========================Scenario 1 =======================
+//========================Scenario 1 =======================/
+function scenario1() {
 let column = new Column(1, 'online', 10, 2) //id, status, amountOfFloors, amountOfElevators
-console.log("as", column.elevatorsList[0].currentFloor)
 column.elevatorsList[0].currentFloor =2
-console.log("a2", column.elevatorsList[0].currentFloor)
 column.elevatorsList[1].currentFloor =6
-console.log("a3", column.elevatorsList[1].currentFloor)
-let elevator=column.requestElevator(3, 'Up')
-console.log("a5", elevator)
-elevator.requestFloor(7)
+
+let elevator = column.requestElevator(3, 'Up');
+elevator.requestFloor(7);
 console.log()
+}
+
 //======================== End Scenario 1 =======================*/
 
+// ==================================Scenario 2===================
+function scenario2() {
+    console.log("****************************** SCENARIO 2: ******************************");
+    let columnScenario2 = new Column(1, 'online', 10, 2);     
+    columnScenario2.elevatorsList[0].currentFloor = 10;
+    columnScenario2.elevatorsList[1].currentFloor = 3;
+    console.log("Person 1: (elevator 2 is expected)");
+    let elevator = columnScenario2.requestElevator(1, 'Up');
+    elevator.requestFloor(6);
 
-/* ==================================Scenario 2===================
-let column = new Column(1, 'online', 10, 2)
+    console.log("----------------------------------");
+    console.log("Person 2: (elevator 2 is expected)");
+    elevator = columnScenario2.requestElevator(3, 'Up');
+    elevator.requestFloor(5);
+    console.log("----------------------------------");
 
-column.elevatorsList[0].currentFloor =10
-console.log("b1", column.elevatorsList[0].currentFloor)
-column.elevatorsList[1].currentFloor =3
-console.log("b2", column.elevatorsList[1].currentFloor)
-//Part1
-let elevator=column.requestElevator(1, 'Up')
-console.log("b3", elevator)
-/*elevator.requestFloor(6)
-
-//Part2
-let elevator=column.requestElevator(3, 'Up')
-elevator.requestFloor(5)
-
-//Part3
-let elevator=column.requestElevator(9, 'Down')
-elevator.requestFloor(2)
-
-// ==================================End Scenario 2==================
+    console.log("Person 3: (elevator 1 is expected)");
+    elevator = columnScenario2.requestElevator(9, 'Down');
+    elevator.requestFloor(2);
+    console.log("=================================="); 
+}
+// ==================================End Scenario 2==================*/
 
 //=================================Scenario 3========================
-let column = new Column(1, 'online', 10, 2)
-column.elevatorList[0].currentFloor= 10
-column.elevatorList[1].currentFloor = 3
-column.elevatorList[1].staus = 'Up'
-column.elevatorList[1].destination = 6
+function scenario3() {
+    console.log();
+    console.log("****************************** SCENARIO 3: ******************************");
+    let columnScenario3 = new Column(1, 'online', 10, 2);     
+    columnScenario3.elevatorsList[0].floor = 10;
+    columnScenario3.elevatorsList[1].floor = 3;
+    columnScenario3.elevatorsList[1].status = 'Up';
+    
+    console.log();
+    console.log("Person 1: (elevator 1 is expected)");
+    columnScenario3.requestElevator(3, 'Down');
+    columnScenario3.elevatorsList[0].requestFloor(2, columnScenario3);
+    console.log("----------------------------------");
+    console.log();
 
-//Part 1
-let.elevator=column.requestElevator(3, 'Down')
-elevator.requestFloor(2)
+    //2 minutes later elevator 1(B) finished its trip to 6th floor
+    columnScenario3.elevatorsList[1].floor = 6;
+    columnScenario3.elevatorsList[1].status = 'idle';
 
-
-//Part 2
-let.elevator=column.requestElevator(10, 'Down')
-elevator.requestFloor(3)
-
+    console.log("Person 2: (elevator 2 is expected)");
+    let elevator = columnScenario3.requestElevator(10, 'Down');
+    elevator.requestFloor(3);
+    console.log("==================================");
+}
 //==================================End Scenario 3====================*/
+//scenario1();
+//scenario2();
+//scenario3();
 module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
