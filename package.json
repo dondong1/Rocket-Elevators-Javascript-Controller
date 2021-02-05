@@ -1,0 +1,19 @@
+{
+  "name": "rocket-elevators-javascript-controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Rocket-Elevators-Javascript-Controller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dondong1/Rocket-Elevators-Javascript-Controller.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dondong1/Rocket-Elevators-Javascript-Controller/issues"
+  },
+  "homepage": "https://github.com/dondong1/Rocket-Elevators-Javascript-Controller#readme"
+}

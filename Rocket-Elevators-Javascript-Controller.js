@@ -252,18 +252,18 @@ function scenario2() {
     columnScenario2.elevatorsList[0].currentFloor = 10;
     columnScenario2.elevatorsList[1].currentFloor = 3;
     console.log("Person 1: (elevator 2 is expected)");
-    let elevator = columnScenario2.requestElevator(1, 'Up');
-    elevator.requestFloor(6);
+    let elevator1 = columnScenario2.requestElevator(1, 'Up');
+    elevator1.requestFloor(6);
 
     console.log("----------------------------------");
     console.log("Person 2: (elevator 2 is expected)");
-    elevator = columnScenario2.requestElevator(3, 'Up');
-    elevator.requestFloor(5);
+    let elevator2 = columnScenario2.requestElevator(3, 'Up');
+    elevator2.requestFloor(5);
     console.log("----------------------------------");
 
     console.log("Person 3: (elevator 1 is expected)");
-    elevator = columnScenario2.requestElevator(9, 'Down');
-    elevator.requestFloor(2);
+    let elevator3 = columnScenario2.requestElevator(9, 'Down');
+    elevator3.requestFloor(2);
     console.log("=================================="); 
 }
 // ==================================End Scenario 2==================*/
@@ -296,5 +296,5 @@ function scenario3() {
 //==================================End Scenario 3====================*/
 //scenario1();
 //scenario2();
-//scenario3();
+scenario3();
 module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
