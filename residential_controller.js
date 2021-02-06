@@ -84,7 +84,10 @@ class Column {
             else {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor)
             }
-     
+            bestElevatorInformations.bestElevator
+            bestElevatorInformations.bestScore
+            bestElevatorInformations.referenceGap
+
         });
 
         console.log();
@@ -291,7 +294,7 @@ function scenario3() {
     console.log("==================================");
 }
 //==================================End Scenario 3====================*/
-scenario1();
-scenario2();
-scenario3();
+//scenario1();
+//scenario2();
+//scenario3();
 module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}

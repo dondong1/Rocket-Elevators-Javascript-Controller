@@ -1,7 +1,7 @@
 {
   "name": "rocket-elevators-javascript-controller",
   "version": "1.0.0",
-  "description": "",
+  "description": "SUMMARY:\r 1- GLOBAL VARIABLES\r 2- COLUMN CLASS\r     2a- Constructor and its attributes\r     2b- Methods to create a list: createCallButtons, createElevators\r     2c- Entry method: requestElevator\r     2d- Methods for logic: findElevator, checkIfElevatorIsBetter",
   "main": "Rocket-Elevators-Javascript-Controller.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
