@@ -35,10 +35,9 @@ class Column {
 
     createElevators(_amountOfFloors, _amountOfElevators) {
         for(let i = 0; i < _amountOfElevators; i++) {
-            let elevator = new Elevator(elevatorID, 'idle', _amountOfFloors, 1) //id, status, amountOfFloors, currentFloor
+            let elevator = new Elevator(elevatorID +1, 'idle', _amountOfFloors, 1) //id, status, amountOfFloors, currentFloor
             this.elevatorsList.push(elevator)
  //           console.log(elevator)
-            elevatorID++
         }
     }
 
@@ -131,10 +130,8 @@ class Elevator {
     createFloorRequestButtons(_amountOfFloors) {
         let buttonFloor = 1
         for (let i =0; i < _amountOfFloors; i++) {
-            let floorRequestButton = new FloorRequestButton(floorRequestButtonID, 'OFF', buttonFloor) //id, status, floor
+            let floorRequestButton = new FloorRequestButton(floorRequestButtonID +1, 'OFF', buttonFloor +1) //id, status, floor
             this.floorRequestButtonsList.push(floorRequestButton)
-            buttonFloor++
-            floorRequestButtonID++
         }
     }
 
@@ -294,7 +291,7 @@ function scenario3() {
     console.log("==================================");
 }
 //==================================End Scenario 3====================*/
-//scenario1();
-//scenario2();
+scenario1();
+scenario2();
 scenario3();
 module.exports = {Column, Elevator, CallButton, FloorRequestButton, Door}
